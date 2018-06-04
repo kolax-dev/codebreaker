@@ -23,8 +23,10 @@ module Codebreaker
     end
 
     context '#input_code' do
-      it 'test method called by input validate' do
+      before do
         game.instance_variable_set(:@secret_code, '1234')
+      end
+      it 'test method called by input validate' do
         expect(game.input_code('1234')).to be true
         expect(game.input_code('1235')).to eq('+++.')
         expect(game.input_code('5555')).to eq('....')
@@ -32,12 +34,10 @@ module Codebreaker
         expect(game.input_code('4551')).to eq('-..-')
       end
       it 'test method called by input not validate' do
-        game.instance_variable_set(:@secret_code, '1234')
         expect { game.input_code('8abcd erer') }.to raise_exception
         expect { game.input_code('') }.to raise_exception
       end
       it 'test method called by input fot hint' do
-        game.instance_variable_set(:@secret_code, '1234')
         rand_index = game.instance_variable_get(:@rand_index)
         hint = ''
         game.instance_variable_get(:@secret_code).chars.each_with_index do |char, index|
