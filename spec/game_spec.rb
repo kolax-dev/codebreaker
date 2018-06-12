@@ -37,17 +37,14 @@ module Codebreaker
         expect { game.input_code('8abcd erer') }.to raise_exception
         expect { game.input_code('') }.to raise_exception
       end
-      it 'test method called by input fot hint' do
-        rand_index = game.instance_variable_get(:@rand_index)
-        hint = ''
-        game.instance_variable_get(:@secret_code).chars.each_with_index do |char, index|
-          hint << if index == rand_index
-                    char
-                  else
-                    '.'
-                  end
-        end
-        expect(game.input_code('7')).to eq(hint)
+      it 'test method called by input fot hint first' do
+        game.instance_variable_set(:@rand_index, 2)
+        expect(game.input_code('7')).to eq("..3.")
+      end
+      it 'test method called by input fot hint when used' do
+        game.instance_variable_set(:@rand_index, 2)
+        game.instance_variable_set(:@hint, false)
+        expect(game.input_code('7')).to eq('hint used')
       end
     end
 
