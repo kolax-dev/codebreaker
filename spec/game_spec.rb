@@ -39,7 +39,7 @@ module Codebreaker
       end
       it 'test method called by input fot hint first' do
         game.instance_variable_set(:@rand_index, 2)
-        expect(game.input_code('7')).to eq("..3.")
+        expect(game.input_code('7')).to eq('..3.')
       end
       it 'test method called by input fot hint when used' do
         game.instance_variable_set(:@rand_index, 2)
@@ -55,7 +55,7 @@ module Codebreaker
         expect(game.save_result(name, count_attempts)).to eq('Gamer: Petrov; Attempts: 5')
       end
       it 'saving the result to a file' do
-        result = File.read('lib/result.txt')
+        result = File.read('lib/codebreaker/tmp/result.txt')
         expect(result).to eq("Gamer: Petrov; Attempts: 5\n")
       end
     end
